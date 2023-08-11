@@ -1,5 +1,21 @@
 import '@/styles/globals.css'
+import Layout from "@/components/Layout";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import Transition from "@/components/Transition";
+import {useRouter} from "next/router";
+import {AnimatePresence, motion} from "framer-motion";
+
+
+export default function App({Component, pageProps}) {
+    const router = useRouter();
+    return (
+        <Layout>
+            <AnimatePresence mode={'wait'}>
+                <motion.div key={router.route} className={"h-full"}>
+                    <Transition/>
+                    <Component {...pageProps} />
+                </motion.div>
+            </AnimatePresence>
+        </Layout>
+    )
 }
